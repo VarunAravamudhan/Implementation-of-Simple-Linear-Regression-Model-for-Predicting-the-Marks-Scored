@@ -1,4 +1,3 @@
-
 # Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored
 
 ## AIM:
@@ -9,123 +8,97 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. Store data in a structured format (e.g., CSV, DataFrame).
-2. Use a Simple Linear Regression model to fit the training data.
-3. Use the trained model to predict values for the test set.
-4. Evaluate performance using metrics like Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
+1. Load and Prepare Data
+
+   • Import necessary libraries (pandas, numpy, matplotlib, sklearn).
+   
+    • Load student_scores.csv and extract values of independent variable X and dependent variable Y.
+   
+3. Split Data into Training and Testing Sets
+
+    • Use train_test_split() to divide data (2/3 training, 1/3 testing).
+   
+5. Train Linear Regression Model
+
+    • Initialize LinearRegression().
+
+   • Fit the model using X_train and Y_train.
+
+7. Make Predictions and Evaluate Model
+
+   • Predict scores using X_test.
+
+   • compute MSE, MAE, and RMSE to assess performance.
+
+9. Visualize Results
+
+   • Plot training data with a scatter plot.
+
+    • Draw the best-fit regression line.
 
 ## Program:
-~~~
-Developed by: Varun A
-RegisterNumber: 212224240178
-~~~
-~~~
+
+```
+##Program to implement the simple linear regression model for predicting the marks scored.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_absolute_error,mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 df=pd.read_csv('student_scores.csv')
+
 #displaying the content in datafile
 df.head()
-~~~
-## Output:
-
-![mlpic](https://github.com/user-attachments/assets/46372791-1b03-4fef-9bf9-21ac7f56215c)
-
-~~~
 df.tail()
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/325b3fcd-343e-48de-be71-882eb4ffa902)
 
-~~~
-x=df.iloc[:,:-1].values
-x
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/f1e7c477-8729-4146-b542-028d779322e1)
+#Segregating data to variables
+X = df.iloc[:,:-1].values
+X
+Y=df.iloc[:,-1].values
+Y
 
-~~~
-y=df.iloc[:,1].values
-y
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/b24dd9e7-57c4-48b3-a8b0-e07b12b57973)
-
-
-~~~
+#splitting your data and test data
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
-~~~
-~~~
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=1/3,random_state=0)
 from sklearn.linear_model import LinearRegression
 regressor=LinearRegression()
-regressor.fit(x_train,y_train)
-y_pred=regressor.predict(x_test)
-~~~
+regressor.fit(X_train,Y_train)
+Y_pred = regressor.predict(X_test)
+Y_pred
 
-~~~
-y_pred
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/4e4bcaf3-7475-4961-9698-bb123e9a39fb)
+mse=mean_squared_error(Y_test,Y_pred)
+print("MSE=",mse)
 
-~~~
-y_test
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/17e79a54-20e5-46b7-a147-3188fc659f53)
+mae=mean_absolute_error(Y_test,Y_pred)
+print("MAE=",mae)
 
-~~~
-mse=mean_squared_error(y_test,y_pred)
-print('MSE = ',mse)
-mae=mean_absolute_error(y_test,y_pred)
-print('MAE =',mae)
 rmse=np.sqrt(mse)
-print("RMSE =",rmse)
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/e6125223-71e0-477a-8ab8-60524f53691e)
-~~~
-plt.scatter(x_train,y_train,color="orange")
-plt.plot(x_train,regressor.predict(x_train),color="red")
-plt.title("Hours vs Scores (Training Set)")
+print("RMSE=",rmse)
+
+#graph plot for training data
+plt.scatter(X_train,Y_train,color="orange")
+plt.plot(X_train,regressor.predict(X_train),color="red")
+plt.title("Hours vs Scores(Training Set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 plt.show()
-~~~
-## Output:
-![image](https://github.com/user-attachments/assets/0d169e89-8175-4a89-9c64-72766c520da9)
 
-~~~
-plt.scatter(x_test,y_test,color="orange")
-plt.plot(x_test,y_pred,color="red")
-plt.title("Hours vs Scores (Test Set)")
+#graph plot for testing data
+plt.scatter(X_test,Y_test,color="orange")
+plt.plot(X_test,regressor.predict(X_test),color="red")
+plt.title("Hours vs Scores(Testing set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 plt.show()
-~~~
+
+Developed by:Varun A
+RegisterNumber: 212224240178
+
+```
 ## Output:
-![image](https://github.com/user-attachments/assets/5d417873-550b-4717-9d7c-a15da78c6862)
+![image](https://github.com/Ashera2004/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/blob/fe058a77738d4e74fe00bef77cbc4f3644e5e65a/graph_ex2.png)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![image](https://github.com/Ashera2004/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/blob/main/graph2_ex2.png)
 
 
 ## Result:
