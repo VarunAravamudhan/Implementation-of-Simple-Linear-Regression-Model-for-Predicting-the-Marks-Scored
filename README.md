@@ -21,7 +21,8 @@ To write a program to predict the marks scored by a student using the simple lin
 6.Scale new data using the same scaler, apply the model parameters (theta), and inverse scale the prediction to get the final result.
 ## Program:
 ```
-
+Developed by :Varun A
+Reg no:21222420178
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
